@@ -1,3 +1,9 @@
+def update_quality_main(items)
+  #declare Main
+  main = Main.new
+  main.update_items(items)
+end 
+
 class Main 
   def update_items(items)
     items.each do |item|
@@ -21,13 +27,11 @@ class Main
         common = CommonItems.new
         common.update_quality(item)
         common.update_sellin(item)
-    end
+      end
   end
 end
-class CommonItems
-  # def initialize(item)
-  # end
 
+class CommonItems
   def update_quality(item)
     if item.quality > 0 && item.sellin <= 0 
       return item.quality -= 2
@@ -80,7 +84,7 @@ class BackstageItems < CommonItems
 end
 
 class ConjuredItems < CommonItems
-  def update_quality
+  def update_quality(item)
     if item.quality > 0 && item.sellin <= 0 
       return item.quality -= 4
     elsif item.quality > 0 && item.sellin > 0 
@@ -89,12 +93,7 @@ class ConjuredItems < CommonItems
       return item.quality ##already the lowest value
     end
   end
-
 end
-
-##declare Main
-main = Main.new
-main.update_items(Items)
 # DO NOT CHANGE THINGS BELOW -----------------------------------------
 
 Item = Struct.new(:name, :sell_in, :quality)
